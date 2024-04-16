@@ -4,10 +4,10 @@
 Создана ВМ в VirtualBox с ОС Ubuntu 20.04, в которой установил Docker, docker-compose и создал каталог /var/lib/postgres.
 
 ## Выполнение ДЗ
-1. развернуть контейнер с PostgreSQL 15 смонтировав в него /var/lib/postgresql
-    1.1 Создаем docker-сеть: 
-    sudo docker network create pg-net
-    1.2 подключаем созданную сеть к контейнеру сервера Postgres:
+* развернуть контейнер с PostgreSQL 15 смонтировав в него /var/lib/postgresql
+    * Создаем docker-сеть: 
+      sudo docker network create pg-net
+    * подключаем созданную сеть к контейнеру сервера Postgres:
     sudo docker run --name pg-server --network pg-net -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v /var/lib/postgres:/var/lib/postgresql/data postgres:15
     картинка 1
 2. разворачиваем контейнер с клиентом postgres и подключаемся к контейнеру с сервером

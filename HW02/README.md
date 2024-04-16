@@ -18,7 +18,7 @@
    
 ```sudo docker run -it --rm --network pg-net --name pg-client postgres:15 psql -h pg-server -U postgres```
 картинка
-    2. создаем таблицу со строками:
+    * создаем таблицу со строками:
     
     ```CREATE TABLE test_tab (id SERIAL PRIMARY KEY, title TEXT);```
     

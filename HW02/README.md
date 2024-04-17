@@ -17,7 +17,7 @@
    
 ```sudo docker run -it --rm --network pg-net --name pg-client postgres:15 psql -h pg-server -U postgres```    
     
-    * создаем таблицу со строками:
+   * создаем таблицу со строками:
     
 ```CREATE TABLE test_tab (id SERIAL PRIMARY KEY, title TEXT);```
     
@@ -26,5 +26,16 @@
 ```INSERT INTO test_tab (id, title) VALUES (2, 'Строка 2');```
     картинка 3
     
-4. подключится к контейнеру с сервером с ноутбука/компьютера извне инстансов GCP/ЯО/места установки докера   
-    
+3. подключится к контейнеру с сервером с ноутбука/компьютера извне инстансов GCP/ЯО/места установки докера   
+    картинка 4
+
+4. удалить контейнер с сервером
+   картинка 5
+
+5. создать контейнер заново
+   ```sudo docker run --name pg-server --network pg-net -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v /var/lib/postgres:/var/lib/postgresql/data postgres:15```
+   картинка 6
+
+6. подключаемся снова из контейнера с клиентом к контейнеру с сервером и проверяем что данные остались на месте
+   ```sudo docker run -it --rm --network pg-net --name pg-client postgres:15 psql -h pg-server -U postgres```
+   картинка 7

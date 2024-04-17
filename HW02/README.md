@@ -49,4 +49,4 @@
    
    ```sudo docker run -it --rm --network pg-net --name pg-client postgres:15 psql -h pg-server -U postgres```
    
-   <img src="/HW02/xxx/connect_server2.png" alt="connect_server2.png" />
+   <img src="/HW02/xxx/connect_server2.PNG" alt="connect_server2.png" />

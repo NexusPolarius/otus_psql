@@ -14,7 +14,6 @@
     ```sudo docker run --name pg-server --network pg-net -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v /var/lib/postgres:/var/lib/postgresql/data postgres:15```
     картинка 1
 2. разворачиваем контейнер с клиентом postgres и подключаемся к контейнеру с сервером
-    * ччч
    
 ```sudo docker run -it --rm --network pg-net --name pg-client postgres:15 psql -h pg-server -U postgres```    
     * создаем таблицу со строками:

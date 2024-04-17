@@ -13,7 +13,7 @@
        
     ```sudo docker run --name pg-server --network pg-net -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v /var/lib/postgres:/var/lib/postgresql/data postgres:15```
     
-	<img src="xxx/pg_server.png" alt="pg_server.png" />
+	<img src="../xxx/pg_server.png" alt="pg_server.png" />
 	
 2. разворачиваем контейнер с клиентом postgres и подключаемся к контейнеру с сервером
    

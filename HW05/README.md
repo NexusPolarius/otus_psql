@@ -9,8 +9,8 @@
 > pgbench -i postgres
 
 > pgbench -c8 -P 6 -T 60 -U postgres postgres
-    
-	<img src="/HW05/xxx/1.PNG" alt="def_conf.png" /> 
+
+<img src="/HW05/xxx/1.PNG" alt="def_conf.png" /> 
 	
 2. Применить параметры настройки PostgreSQL из прикрепленного к материалам занятия файла
    
@@ -40,7 +40,7 @@
     
 3. Протестировать заново  
     
-	<img src="/HW05/xxx/2.PNG" alt="tun_conf.png" /> 
+<img src="/HW05/xxx/2.PNG" alt="tun_conf.png" /> 
 
 4. Что изменилось и почему?
    

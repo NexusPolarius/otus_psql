@@ -7,6 +7,7 @@
 1. выполнить
 
 > pgbench -i postgres
+
 > pgbench -c8 -P 6 -T 60 -U postgres postgres
     
 	<img src="/HW05/xxx/1.PNG" alt="def_conf.png" /> 
@@ -14,16 +15,27 @@
 2. Применить параметры настройки PostgreSQL из прикрепленного к материалам занятия файла
    
 > max_connections = 40
+
 > shared_buffers = 1GB
+
 > effective_cache_size = 3GB
+
 > maintenance_work_mem = 512MB
+
 > checkpoint_completion_target = 0.9
+
 > wal_buffers = 16MB
+
 > default_statistics_target = 500
+
 > random_page_cost = 4
+
 > effective_io_concurrency = 2
+
 > work_mem = 65536kB
+
 > min_wal_size = 4GB
+
 > max_wal_size = 16GB
     
 3. Протестировать заново  

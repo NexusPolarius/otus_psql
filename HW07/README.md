@@ -36,6 +36,8 @@
    
 Второй апдейт заблокирован и через 200 миллисекунд в журнал сообщений добавится об этом запись
 
+```user$ tail -n 10 /var/log/postgresql/postgresql-15-main.log```
+
 <img src="/HW07/xxx/1.PNG" alt="lock1.png" /> 
 
 

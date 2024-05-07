@@ -24,13 +24,15 @@
 
 Начал апдейт в первой сесси
 
-```BEGIN;
-   UPDATE accounts SET amount = amount - 100.00 WHERE acc_no = 1;```
+```BEGIN;```
+
+```UPDATE accounts SET amount = amount - 100.00 WHERE acc_no = 1;```
    
 Начал апдейт во второй сесси
 
-```BEGIN;
-   UPDATE accounts SET amount = amount + 100.00 WHERE acc_no = 1;```
+```BEGIN;```
+
+```UPDATE accounts SET amount = amount + 100.00 WHERE acc_no = 1;```
    
 Второй апдейт заблокирован и через 200 миллисекунд в журнал сообщений добавится об этом запись
 

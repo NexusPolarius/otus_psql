@@ -7,7 +7,8 @@
 
 1. Создаем БД, схему и в ней таблицу.
 	
-```postgres=# create database test_db;
+```
+postgres=# create database test_db;
 CREATE DATABASE
 
 postgres=# \c test_db
@@ -19,25 +20,29 @@ CREATE SCHEMA
 
 2. Заполним таблицы автосгенерированными 100 записями.
 
-```test_db=# create table test.test_tb as select generate_series(1, 100) as id, md5(random()::text)::char(10) as text;
+```
+test_db=# create table test.test_tb as select generate_series(1, 100) as id, md5(random()::text)::char(10) as text;
 SELECT 100
 ```
 
 3. Под линукс пользователем Postgres создадим каталог для бэкапов.
 
-```user@psql:~$ sudo mkdir /opt/backups
+```
+user@psql:~$ sudo mkdir /opt/backups
 user@psql:~$ sudo chown postgres:postgres /opt/backups/
 ```
 
 4. Сделаем логический бэкап используя утилиту COPY.
 
-```test_db=# \copy test.test_tb to '/opt/backups/tb_backup.sql'
+```
+test_db=# \copy test.test_tb to '/opt/backups/tb_backup.sql'
 COPY 100
 ```
 
 5. Восстановим в 2 таблицу данные из бэкапа.
 
-```test_db=# create table test.test_tb2 (id int, text char(10));
+```
+test_db=# create table test.test_tb2 (id int, text char(10));
 CREATE TABLE
 
 test_db=# \copy test.test_tb2 from '/opt/backups/tb_backup.sql'
@@ -64,7 +69,8 @@ test_db=# select * from test.test_tb2;
 
 7. Используя утилиту pg_restore восстановим в новую БД только вторую таблицу!
 
-```postgres=# create database test_db2;
+```
+postgres=# create database test_db2;
 CREATE DATABASE
 
 postgres=# \c test_db2

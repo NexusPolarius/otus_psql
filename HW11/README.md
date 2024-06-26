@@ -93,26 +93,57 @@ SET
 
 3. Реализовать индекс на часть таблицы или индекс на поле с функцией
 
-```
-postgres=# CREATE SUBSCRIPTION vm1_test2_sub CONNECTION 'host=10.0.1.xxx user=postgres dbname=postgres' PUBLICATION vm2_test2_pub WITH (copy_data = False);
-NOTICE:  created replication slot "vm1_test2_sub" on publisher
-CREATE SUBSCRIPTION
+Создал индекс на часть таблицы, где значения столбца bool_field = FALSE:
 
-postgres=# \dRs+                                                                                     List of subscriptions
-     Name      |  Owner   | Enabled |   Publication   | Binary | Streaming | Two-phase commit | Disable on error | Synchronous commit |                   Conninfo                   | Skip LSN
----------------+----------+---------+-----------------+--------+-----------+------------------+------------------+--------------------+----------------------------------------------+----------
- vm1_test2_sub | postgres | t       | {vm2_test2_pub} | f      | f         | d                | f                | off                | host=10.0.1.xxx user=postgres dbname=postgres | 0/0
-(1 row)
+```
+postgres=# CREATE INDEX ON index_test_table(bool_field) WHERE bool_field = FALSE;
+CREATE INDEX
+```
+
+Выполним план запроса, где bool_field = TRUE и видим что используется Seq Scan:
+
+```
+postgres=# EXPLAIN SELECT * FROM index_test_table WHERE bool_field = TRUE;
+                                      QUERY PLAN
+--------------------------------------------------------------------------------------
+ Seq Scan on index_test_table  (cost=10000000000.00..10000001443.00 rows=967 width=7)
+   Filter: bool_field
+ JIT:
+   Functions: 2
+   Options: Inlining true, Optimization true, Expressions true, Deforming true
+(5 rows)
+```
+
+Выполним план запроса, где bool_field = FALSE и видим что используется Index Scan:
+
+```
+postgres=# EXPLAIN SELECT * FROM index_test_table WHERE bool_field = FALSE;
+                                             QUERY PLAN
+----------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on index_test_table  (cost=864.22..2297.55 rows=99033 width=7)
+   Recheck Cond: (NOT bool_field)
+   ->  Bitmap Index Scan on index_test_table_bool_field_idx  (cost=0.00..839.46 rows=99033 width=0)
+(3 rows)
 ```
 
 4. Создать индекс на несколько полей
 
+СОздал индекс по двум колонкам
+
 ```
-INSERT INTO test (id, title) VALUES (1, 'table test text 1');
-INSERT INTO test (id, title) VALUES (2, 'table test text 2');
-INSERT INTO test (id, title) VALUES (3, 'table test text 3');
-INSERT INTO test (id, title) VALUES (4, 'table test text 4');
-INSERT INTO test (id, title) VALUES (5, 'table test text 5');
+postgres=# CREATE INDEX ON index_test_table(random_num, random_text);
+CREATE INDEX
+```
+
+Выполнил план запроса и вижу что используется Index Scan:
+
+```
+postgres=# EXPLAIN SELECT * FROM index_test_table WHERE random_num <= 100 AND random_text = 'a';
+                                                     QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------
+ Index Scan using index_test_table_random_num_random_text_idx on index_test_table  (cost=0.29..9.38 rows=1 width=7)
+   Index Cond: ((random_num <= 100) AND (random_text = 'a'::text))
+(2 rows)
 ```
 
 

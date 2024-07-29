@@ -42,11 +42,11 @@ CREATE TABLE part_ticket_flights (like ticket_flights) PARTITION BY LIST (fare_c
 Создадим секции по типам билетов:
 
 ```
-CREATE TABLE ticket_business PARTITION OF part_ticket_flights FOR VALUES IN (‘Business');
+CREATE TABLE ticket_business PARTITION OF part_ticket_flights FOR VALUES IN ('Business');
 
-CREATE TABLE ticket_comfort PARTITION OF part_ticket_flights FOR VALUES IN (‘Comfort');
+CREATE TABLE ticket_comfort PARTITION OF part_ticket_flights FOR VALUES IN ('Comfort');
 
-CREATE TABLE ticket_economy PARTITION OF part_ticket_flights FOR VALUES IN (‘Economy');
+CREATE TABLE ticket_economy PARTITION OF part_ticket_flights FOR VALUES IN ('Economy');
 ```
 
 3. Скопируем данные из ticket_flights в part_ticket_flights и посмотрим что получилось:

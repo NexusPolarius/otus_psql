@@ -14,7 +14,7 @@
 
 ## Схема стенда
 
-<img src="/HW15/xxx/shema." alt="shema.png" /> 
+<img src="/HW15/xxx/shema.png" alt="shema.png" /> 
 
 
 
